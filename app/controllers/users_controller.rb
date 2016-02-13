@@ -15,10 +15,21 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+
+    # @user = User.find(params[:id]).update( params_create )
+    # puts @user
+  end
+
   private
 
   def params_create
     params.require(:user).permit(:name, :email, :password)
   end
+
 
 end
