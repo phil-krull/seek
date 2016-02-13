@@ -1,13 +1,14 @@
 class UsersController < ApplicationController
 
   def login
+    @user = User.find(params[:id])
   end
 
   def create
     user = User.new( params_create)
     if user.valid?
-      @user = User.create( params_create )
-      redirect_to "/users/#{@user.id}"
+      user.save
+      redirect_to "/users/#{user.id}"
     else
       flash[:errors] = user.errors.full_messages
       redirect_to users_new_path
