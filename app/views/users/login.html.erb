@@ -1,11 +1,18 @@
 <h1>On Users Logged In Page</h1>
 
-<h2><%= session[:user_name] %></h2>
+<a href="/users/<%= @user.id %>/edit">Edit Profile</a>
 
-<h2><%= @user.name %></h2>
+<h2><%= session[:user_name] %></h2>
 
 <% @secret.each do |secret| %>
   <p><%= secret.content %></p>
 <% end %>
 
-<a href="/users/<%= @user.id %>/edit">Edit Profile</a>
+<h2><%= @user.name %> Add a New Secret</h2>
+
+<form action="/secrets" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <p>Add a Secret:
+    <input type="text" name="secret"></p>
+  <p><button>Add</button></p>
+</form>
