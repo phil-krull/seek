@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
   def login
     @user = User.find(params[:id])
+    @secret = User.find(params[:id]).secrets
   end
 
   def create
