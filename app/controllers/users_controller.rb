@@ -24,6 +24,12 @@ class UsersController < ApplicationController
     redirect_to "/users/#{params[:id]}"
   end
 
+  def destroy
+    User.find(params[:id]).destroy
+    session[:user_id] = nil
+    redirect_to sessions_new_path
+  end
+
   private
 
   def params_create

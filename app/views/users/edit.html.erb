@@ -7,3 +7,8 @@
     <input type="text" name="user[email]" value="<%= @user.email %>"></p>
     <input type="submit" value="Update">
 </form>
+<form action="/users/<%= @user.id %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="delete">
+  <button>Delete Account</button>
+</form>
