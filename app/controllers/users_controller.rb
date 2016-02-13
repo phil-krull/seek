@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.new( params_create)
+    user = User.new( params_create )
     if user.valid?
       user.save
       redirect_to "/users/#{user.id}"
@@ -20,9 +20,8 @@ class UsersController < ApplicationController
   end
 
   def update
-
-    # @user = User.find(params[:id]).update( params_create )
-    # puts @user
+    @user = User.find(params[:id]).update( params_create )
+    redirect_to "/users/#{params[:id]}"
   end
 
   private
@@ -30,6 +29,5 @@ class UsersController < ApplicationController
   def params_create
     params.require(:user).permit(:name, :email, :password)
   end
-
 
 end
