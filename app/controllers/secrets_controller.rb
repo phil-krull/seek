@@ -5,16 +5,18 @@ class SecretsController < ApplicationController
   end
 
   def create
-    puts params[:secrets][:user_id]
-    puts params[:secrets][:content]
-    Secret.create( params_create )
+    Secret.create(params_create)
     redirect_to "/users/#{params[:secrets][:user_id]}"
+  end
+
+  def destroy
+    Secret.find( params[:id] ).destroy
+    redirect_to "/users/#{params[:user_id]}"
   end
 
   private
 
   def params_create
-    puts params
     params.require(:secrets).permit(:user_id, :content)
   end
 

@@ -4,9 +4,17 @@
 
 <h2><%= session[:user_name] %></h2>
 
-<% @secret.each do |secret| %>
-  <p><%= secret.content %></p>
-<% end %>
+<% if @secret
+  @secret.each do |secret| %>
+    <p><%= secret.content %></p>
+    <form action="/secrets/<%= secret.id %>" method="post">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <input type="hidden" name="_method" value="delete">
+      <input type="hidden" name="user_id" value="<%= @user.id %>">
+      <button>Delete</button>
+    </form>
+  <% end
+end %>
 
 <h2><%= @user.name %> Add a New Secret</h2>
 
