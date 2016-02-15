@@ -12,4 +12,12 @@ RSpec.describe LikesController, type: :controller do
       expect(response).to redirect_to('/sessions/new')
     end
   end
+  describe 'when signed in as the wrong user' do
+    it "will not let you destroy someone else's like" do
+      @wrong_user = create_user
+      session[:user_id] = @wrong_user
+      delete :destroy
+      expect(response).to redirect_to('/sessions/new')
+    end
+  end
 end
