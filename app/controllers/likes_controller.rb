@@ -5,5 +5,7 @@ class LikesController < ApplicationController
   end
 
   def destroy
+    like = Like.where(user_id:params[:user_id], secret_id:params[:secret_id]).last.destroy
+    redirect_to secrets_index_path
   end
 end

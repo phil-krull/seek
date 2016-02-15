@@ -30,6 +30,8 @@ Rails.application.routes.draw do
 
   post '/likes' => 'likes#create'
 
+  delete '/likes' => 'likes#destroy'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
