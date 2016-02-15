@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   get 'likes/destroy'
 
-  get '/sessions/new'
+  get '/sessions/new' => 'sessions#new'
 
   post '/sessions/create'
 

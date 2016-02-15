@@ -1,19 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe LikesController, type: :controller do
-
-  describe "GET #create" do
-    it "returns http success" do
-      get :create
-      expect(response).to have_http_status(:success)
+  before do
+    @user = create_user
+    @secret1 = @user.secrets.create(user:@user, content:'Oops')
+  end
+  describe 'when not logged in' do
+    it 'user can not add like' do
+      session[:user_id] = nil
+      post :create
+      expect(response).to redirect_to('/sessions/new')
     end
   end
-
-  describe "GET #destroy" do
-    it "returns http success" do
-      get :destroy
-      expect(response).to have_http_status(:success)
-    end
-  end
-
 end
