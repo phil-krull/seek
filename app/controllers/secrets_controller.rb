@@ -1,17 +1,20 @@
 class SecretsController < ApplicationController
+  before_action :require_login, only: [:create, :destroy, :index]
 
   def index
     @secret = Secret.all
   end
 
   def create
+    puts params
     Secret.create(params_create)
     redirect_to "/users/#{params[:secrets][:user_id]}"
   end
 
   def destroy
-    Secret.find( params[:id] ).destroy
-    redirect_to "/users/#{params[:user_id]}"
+    secret = Secret.find( params[:id] )
+    secret.destroy if secret.user == current_user
+    redirect_to "/users/#{current_user.id}"
   end
 
   private
